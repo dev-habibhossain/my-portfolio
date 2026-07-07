@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     Base:      #FAFAF8  (paper)
+     Ink:       #14171F  (primary text)
+     Ink-soft:  #565C6B  (secondary text)
+     Line:      #E4E3DD  (hairlines)
+     Accent:    #3D7068  (signal green — links, tags, status)
+     Accent-2:  #C9A227  (rare highlight — used once or twice)
+     Display:   Space Grotesk / Body: IBM Plex Sans / Utility: IBM Plex Mono
+     ============================================================ */
+
+  :root{
+    --paper:#FAFAF8;
+    --ink:#14171F;
+    --ink-soft:#565C6B;
+    --line:#E4E3DD;
+    --accent:#3D7068;
+    --accent-soft:#E7EFEE;
+    --gold:#C9A227;
+    --card-bg:#FFFFFF;
+    --card-bar-bg:#FCFCFA;
+    --radius:10px;
+    --max:960px;
+    color-scheme: light;
+  }
+
+  [data-theme="dark"]{
+    --paper:#0F1115;
+    --ink:#F4F1EA;
+    --ink-soft:#9BA1AE;
+    --line:#262A33;
+    --accent:#59B3A6;
+    --accent-soft:rgba(89,179,166,0.14);
+    --gold:#E0BA45;
+    --card-bg:#161920;
+    --card-bar-bg:#12141A;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    transition:background .25s ease, color .25s ease;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.02em;
+  }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    z-index:50;
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+    max-width:var(--max);
+    margin:0 auto;
+  }
+  .nav-logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .nav-logo span{color:var(--accent);}
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    color:var(--ink-soft);
+    font-size:14px;
+    font-weight:500;
+  }
+  .nav-links a:hover{color:var(--ink); text-decoration:none;}
+  .nav-toggle{display:none;}
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+  }
+  .theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink);
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 12px;
+    cursor:pointer;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .theme-toggle:hover{border-color:var(--accent);}
+  .theme-toggle .icon{font-size:13px; line-height:1;}
+
+  /* ---------- Section scaffolding ---------- */
+  section{
+    padding:88px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+
+  .tag-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:18px;
+  }
+
+  .section-title{
+    font-size:32px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .section-sub{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    margin-bottom:44px;
+    max-width:520px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:110px;
+    padding-bottom:100px;
+  }
+  .hero-grid{
+    display:flex;
+    align-items:center;
+    gap:48px;
+  }
+  .hero-grid > .hero-text{flex:1.15;}
+  .hero-photo-wrap{
+    position:relative;
+    flex:1;
+    max-width:380px;
+  }
+  .hero-photo-wrap::before{
+    content:"";
+    position:absolute;
+    top:22px;
+    left:-22px;
+    width:100%;
+    height:100%;
+    border-radius:18px;
+    border:1px solid var(--line);
+    background-image:radial-gradient(var(--accent) 1px, transparent 1px);
+    background-size:14px 14px;
+    background-color:var(--accent-soft);
+    opacity:0.55;
+    z-index:0;
+    transition:background-color .25s ease, border-color .25s ease;
+  }
+  .hero-photo{
+    position:relative;
+    z-index:1;
+    aspect-ratio:4/5;
+    padding:10px;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:0 24px 50px -26px rgba(20,23,31,0.35);
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .hero-photo img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:11px;
+  }
+  /* corner crop-marks — a small nod to design/dev tooling, kept quiet */
+  .hero-photo::before,
+  .hero-photo::after,
+  .hero-photo .crop-tl,
+  .hero-photo .crop-br{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:22px;
+    pointer-events:none;
+  }
+  .hero-photo::before{
+    top:-1px; left:-1px;
+    border-top:2px solid var(--accent);
+    border-left:2px solid var(--accent);
+    border-radius:6px 0 0 0;
+  }
+  .hero-photo::after{
+    bottom:-1px; right:-1px;
+    border-bottom:2px solid var(--accent);
+    border-right:2px solid var(--accent);
+    border-radius:0 0 6px 0;
+  }
+  .status-line{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+  .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+  .hero h1{
+    font-size:clamp(38px, 6vw, 64px);
+    font-weight:700;
+    line-height:1.05;
+    max-width:780px;
+  }
+  .hero h1 .hl{color:var(--accent);}
+  .hero-role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-top:18px;
+  }
+  .hero-bio{
+    max-width:560px;
+    color:var(--ink-soft);
+    margin-top:22px;
+    font-size:16.5px;
+  }
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    padding:12px 22px;
+    border-radius:8px;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    background:transparent;
+    color:var(--ink);
+    transition:background .15s ease, color .15s ease, transform .15s ease;
+  }
+  .btn:hover{
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    transform:translateY(-1px);
+  }
+  .btn.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+  .btn.primary:hover{
+    background:#2F5A54;
+    border-color:#2F5A54;
+  }
+
+  /* ---------- Reusable framed panel (echoes hero photo treatment) ---------- */
+  .panel-frame{
+    position:relative;
+  }
+  .panel-frame::before{
+    content:"";
+    position:absolute;
+    top:14px;
+    left:-14px;
+    width:100%;
+    height:100%;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background-image:radial-gradient(var(--accent) 1px, transparent 1px);
+    background-size:14px 14px;
+    background-color:var(--accent-soft);
+    opacity:0.5;
+    z-index:0;
+    transition:background-color .25s ease, border-color .25s ease;
+  }
+  .panel-frame > .panel-inner{position:relative; z-index:1;}
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:56px;
+  }
+  .about-text p{
+    color:var(--ink-soft);
+    margin:0 0 16px;
+    max-width:520px;
+  }
+  .facts{
+    list-style:none;
+    margin:0; padding:20px 24px;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:14px;
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .facts li{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .facts li:last-child{border-bottom:none;}
+  .facts li span:first-child{
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skill-group{
+    margin-bottom:30px;
+  }
+  .skill-group h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    font-weight:500;
+    margin-bottom:14px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:7px 14px;
+    border-radius:6px;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    color:var(--ink);
+    transition:background .25s ease, border-color .25s ease, transform .15s ease, border-color .15s ease;
+  }
+  .chip:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- Projects ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .project-card{
+    position:relative;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease, background .25s ease, border-color .25s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px -18px rgba(20,23,31,0.35);
+    border-color:var(--accent);
+  }
+  .project-card::before,
+  .project-card::after{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    opacity:0;
+    transition:opacity .2s ease;
+    pointer-events:none;
+    z-index:2;
+  }
+  .project-card::before{
+    top:-1px; left:-1px;
+    border-top:2px solid var(--accent);
+    border-left:2px solid var(--accent);
+    border-radius:8px 0 0 0;
+  }
+  .project-card::after{
+    bottom:-1px; right:-1px;
+    border-bottom:2px solid var(--accent);
+    border-right:2px solid var(--accent);
+    border-radius:0 0 8px 0;
+  }
+  .project-card:hover::before,
+  .project-card:hover::after{opacity:1;}
+  .card-bar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    background:var(--card-bar-bg);
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .card-bar i{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--line);
+  }
+  .card-bar span.fname{
+    margin-left:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .card-body{padding:22px;}
+  .card-body h3{font-size:19px; margin-bottom:8px;}
+  .card-body p{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 16px;
+  }
+  .card-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .card-tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:3px 9px;
+    border-radius:12px;
+  }
+  .card-links{display:flex; gap:16px;}
+  .card-links a{font-size:13.5px; font-weight:500;}
+
+  /* ---------- Experience (release log) ---------- */
+  .release{
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .release:last-child{border-bottom:none;}
+  .release-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--accent);
+    font-weight:500;
+    padding-top:2px;
+  }
+  .release-date{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .release-body h3{font-size:18px;}
+  .release-body .company{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin-top:2px;
+    margin-bottom:10px;
+    display:block;
+  }
+  .release-body p{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:40px;
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .contact-box h2{font-size:26px; margin-bottom:10px;}
+  .contact-box p{color:var(--ink-soft); margin:0; max-width:380px;}
+  .contact-links{display:flex; gap:14px; flex-wrap:wrap;}
+
+  footer{
+    padding:32px 24px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:760px){
+    .hero-grid{flex-direction:column-reverse; align-items:stretch; gap:28px;}
+    .hero-photo-wrap{max-width:100%;}
+    .hero-photo-wrap::before{top:14px; left:-14px;}
+    .hero-photo{aspect-ratio:16/11;}
+    .about-grid{grid-template-columns:1fr;}
+    .project-grid{grid-template-columns:1fr;}
+    .nav-links{
+      position:fixed;
+      top:60px; left:0; right:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;
+      padding:20px 24px;
+      gap:16px;
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{
+      display:block;
+      background:none;
+      border:none;
+      font-family:'IBM Plex Mono', monospace;
+      font-size:13px;
+      cursor:pointer;
+      color:var(--ink);
+    }
+    .release{grid-template-columns:1fr;}
+    .contact-box{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="nav-logo">yourname<span>.dev</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme">
+        <span class="icon" id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰ menu</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="status-line"><span class="dot"></span> open to work · replies within a day</div>
+      <h1>Hi, I'm <span class="hl">Your Name</span>.<br>I build things for the web.</h1>
+      <div class="hero-role">// Full-Stack Developer — React · Node · PostgreSQL</div>
+      <p class="hero-bio">
+        Replace this with 2–3 sentences on what you build, what you're good at,
+        and what kind of role you're looking for. Keep it specific — mention a
+        stack, a type of product, or a problem you like solving.
+      </p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="/resume.pdf" download>Download résumé</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap reveal">
+      <div class="hero-photo">
+        <img id="heroPhoto" src="images/headshot-light.jpg" alt="Portrait of Your Name">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="wrap" id="about">
+  <div class="tag-eyebrow">v1.0 — about</div>
+  <h2 class="section-title">A bit more about me</h2>
+  <p class="section-sub">The story behind the stack.</p>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        Write your background here — how you got into development, what you
+        care about (clean code, performance, design, mentoring, whatever's
+        true), and what you're working toward. Two short paragraphs is plenty.
+      </p>
+      <p>
+        Second paragraph: current focus, a recent win, or what you're
+        learning right now. Recruiters skim — keep sentences short.
+      </p>
+    </div>
+    <div class="panel-frame">
+      <ul class="facts panel-inner reveal">
+        <li><span>location</span><span>Your City, Country</span></li>
+        <li><span>experience</span><span>X years</span></li>
+        <li><span>focus</span><span>Frontend / Backend / Full-stack</span></li>
+        <li><span>currently</span><span>Job title @ Company</span></li>
+        <li><span>education</span><span>Degree, Institution</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="wrap" id="skills">
+  <div class="tag-eyebrow">v1.1 — skills</div>
+  <h2 class="section-title">Tools I reach for</h2>
+  <p class="section-sub">Grouped by how I actually use them, not how long the list looks.</p>
+
+  <div class="skill-group reveal">
+    <h3>Languages</h3>
+    <div class="chip-row">
+      <span class="chip">JavaScript</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Python</span>
+      <span class="chip">SQL</span>
+    </div>
+  </div>
+  <div class="skill-group reveal">
+    <h3>Frameworks &amp; Libraries</h3>
+    <div class="chip-row">
+      <span class="chip">React</span>
+      <span class="chip">Next.js</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">Express</span>
+    </div>
+  </div>
+  <div class="skill-group reveal">
+    <h3>Infra &amp; Tools</h3>
+    <div class="chip-row">
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">Docker</span>
+      <span class="chip">AWS</span>
+      <span class="chip">Git</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="wrap" id="projects">
+  <div class="tag-eyebrow">v1.2 — projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <p class="section-sub">Swap these for your real projects — one line on the problem, one on your role.</p>
+
+  <div class="project-grid">
+    <div class="project-card reveal">
+      <div class="card-bar"><i></i><i></i><i></i><span class="fname">project-one/</span></div>
+      <div class="card-body">
+        <h3>Project Name One</h3>
+        <p>One or two sentences: what it does, who it's for, and the problem it solves.</p>
+        <div class="card-tags"><span>React</span><span>Node</span><span>PostgreSQL</span></div>
+        <div class="card-links">
+          <a href="#">Live site →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="card-bar"><i></i><i></i><i></i><span class="fname">project-two/</span></div>
+      <div class="card-body">
+        <h3>Project Name Two</h3>
+        <p>One or two sentences: what it does, who it's for, and the problem it solves.</p>
+        <div class="card-tags"><span>Next.js</span><span>Stripe</span><span>AWS</span></div>
+        <div class="card-links">
+          <a href="#">Live site →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="card-bar"><i></i><i></i><i></i><span class="fname">project-three/</span></div>
+      <div class="card-body">
+        <h3>Project Name Three</h3>
+        <p>One or two sentences: what it does, who it's for, and the problem it solves.</p>
+        <div class="card-tags"><span>TypeScript</span><span>Docker</span></div>
+        <div class="card-links">
+          <a href="#">Live site →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="card-bar"><i></i><i></i><i></i><span class="fname">project-four/</span></div>
+      <div class="card-body">
+        <h3>Project Name Four</h3>
+        <p>One or two sentences: what it does, who it's for, and the problem it solves.</p>
+        <div class="card-tags"><span>Python</span><span>Flask</span></div>
+        <div class="card-links">
+          <a href="#">Live site →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="wrap" id="experience">
+  <div class="tag-eyebrow">v1.3 — experience</div>
+  <h2 class="section-title">Where I've worked</h2>
+  <p class="section-sub">Most recent first.</p>
+
+  <div class="release reveal">
+    <div>
+      <div class="release-tag">Present</div>
+      <span class="release-date">2024 — now</span>
+    </div>
+    <div class="release-body">
+      <h3>Job Title</h3>
+      <span class="company">Company Name</span>
+      <p>What you owned, one concrete result if you have a number (e.g. "cut load time 40%").</p>
+    </div>
+  </div>
+
+  <div class="release reveal">
+    <div>
+      <div class="release-tag">Prior</div>
+      <span class="release-date">2022 — 2024</span>
+    </div>
+    <div class="release-body">
+      <h3>Job Title</h3>
+      <span class="company">Company Name</span>
+      <p>What you owned, one concrete result if you have a number.</p>
+    </div>
+  </div>
+
+  <div class="release reveal">
+    <div>
+      <div class="release-tag">Earlier</div>
+      <span class="release-date">2020 — 2022</span>
+    </div>
+    <div class="release-body">
+      <h3>Job Title</h3>
+      <span class="company">Company Name</span>
+      <p>What you owned, one concrete result if you have a number.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="wrap" id="contact">
+  <div class="tag-eyebrow">v1.4 — contact</div>
+  <div class="panel-frame">
+    <div class="contact-box panel-inner reveal">
+      <div>
+        <h2>Let's talk.</h2>
+        <p>Looking for a full-stack developer? I'd like to hear about it — email is fastest.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn primary" href="mailto:you@example.com">Email me</a>
+        <a class="btn" href="https://github.com/yourhandle" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Your Name — built with HTML &amp; CSS, no framework required.
+</footer>
+
+<script>
+  // Theme toggle (light/dark) — swaps CSS variables + hero photo
+  // Note: this uses an in-memory variable rather than localStorage,
+  // so the choice resets on reload. If you're hosting this yourself
+  // (outside claude.ai) and want it to persist, swap the two marked
+  // lines below for localStorage.getItem/setItem calls.
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeLabel = document.getElementById('themeLabel');
+  const heroPhoto = document.getElementById('heroPhoto');
+
+  let currentTheme = 'light'; // <-- swap for localStorage.getItem('theme') || 'light'
+
+  function applyTheme(theme){
+    currentTheme = theme;
+    if (theme === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+      heroPhoto.src = 'images/headshot-dark.png';
+      themeIcon.textContent = '☀️';
+      themeLabel.textContent = 'Light';
+      themeToggle.setAttribute('aria-label', 'Switch to light theme');
+    } else {
+      root.removeAttribute('data-theme');
+      heroPhoto.src = 'images/headshot-light.jpg';
+      themeIcon.textContent = '🌙';
+      themeLabel.textContent = 'Dark';
+      themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+    }
+    // localStorage.setItem('theme', theme); // <-- uncomment for persistence when self-hosted
+  }
+
+  themeToggle.addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+
+  applyTheme(currentTheme);
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
