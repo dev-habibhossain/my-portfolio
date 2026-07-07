@@ -29,8 +29,9 @@ export const profile = {
   email: "hello@ayaanrahman.dev",
   phone: "+880 1700 000000",
   // Theme-aware portraits (light/dark) live in /public.
-  photoLight: "/portrait-light.jpg",
-  photoDark: "/portrait-dark.jpg",
+  photoLight:
+    "https://i.ibb.co.com/8LDCFqpC/gpt-image-2-A-professional-corporate-headshot-of-a-skilled-male-web-developer-for-Linked-In-s-0.jpg",
+  photoDark: "https://i.ibb.co.com/d0QcfRhz/wmremove-transformed.png",
   resume: "/resume.pdf",
 
   socials: {

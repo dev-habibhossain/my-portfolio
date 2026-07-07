@@ -1,4 +1,5 @@
 import ThemedImage from "@/components/ThemedImage";
+import Reveal from "@/components/Reveal";
 import { profile } from "@/data/profile";
 
 export default function Hero() {
@@ -26,11 +27,11 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div className="hero-photo-wrap reveal">
+        <Reveal className="hero-photo-wrap">
           <div className="hero-photo">
             <ThemedImage priority />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

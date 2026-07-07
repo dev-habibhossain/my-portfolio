@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { profile, socialLinks } from "@/data/profile";
 
@@ -10,7 +11,7 @@ export default function Contact({ full = false, withFooter = true }) {
 
   return (
     <>
-      <section className="wrap reveal" id="contact">
+      <Reveal as="section" className="wrap" id="contact">
         {full ? (
           <div className="contact-grid">
             <div className="contact-aside">
@@ -81,7 +82,7 @@ export default function Contact({ full = false, withFooter = true }) {
             </div>
           </>
         )}
-      </section>
+      </Reveal>
 
       {withFooter ? (
         <footer>

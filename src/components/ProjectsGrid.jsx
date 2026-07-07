@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
 // Dedicated /projects grid: same terminal-card shell as the home section, but
 // with a cover image on each card. The whole card links to the project detail.
 export default function ProjectsGrid() {
   return (
-    <section className="wrap reveal" id="projects">
+    <Reveal as="section" className="wrap" id="projects">
       <div className="project-grid">
         {projects.map((project) => (
           <Link
@@ -45,6 +46,6 @@ export default function ProjectsGrid() {
           </Link>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }

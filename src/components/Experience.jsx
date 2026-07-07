@@ -1,4 +1,5 @@
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import { experience } from "@/data/experience";
 
 // Release-log layout: version-style tag + date on the left, role details right.
@@ -6,7 +7,7 @@ export default function Experience({ limit, full = false }) {
   const items = limit ? experience.slice(0, limit) : experience;
 
   return (
-    <section className="wrap reveal" id="experience">
+    <Reveal as="section" className="wrap" id="experience">
       {full ? null : <SectionHead id="experience" />}
       <div>
         {items.map((job) => (
@@ -23,6 +24,6 @@ export default function Experience({ limit, full = false }) {
           </div>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }

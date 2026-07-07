@@ -11,7 +11,7 @@ export default function PageHeader({ id, title, sub, eyebrow }) {
   const finalSub = sub ?? meta?.sub;
 
   return (
-    <section className="wrap page-intro reveal in">
+    <section className="wrap page-intro">
       <Link href="/" className="back">
         ← Back to home
       </Link>

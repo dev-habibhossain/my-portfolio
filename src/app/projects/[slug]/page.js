@@ -25,7 +25,7 @@ export default async function ProjectPage({ params }) {
 
   return (
     <>
-      <section className="wrap page-intro reveal in">
+      <section className="wrap page-intro">
         <Link href="/projects" className="back">
           ← All projects
         </Link>

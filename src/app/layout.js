@@ -2,7 +2,6 @@ import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
-import FadeInObserver from "@/components/FadeInObserver";
 import { profile } from "@/data/profile";
 
 const spaceGrotesk = Space_Grotesk({
@@ -54,7 +53,6 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <Header />
           <div className="content">{children}</div>
-          <FadeInObserver />
         </ThemeProvider>
       </body>
     </html>

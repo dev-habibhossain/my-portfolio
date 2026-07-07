@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
 // Home projects section: terminal-style cards (card bar + body), matching the
@@ -8,7 +9,7 @@ export default function Projects({ full = false, limit }) {
   const items = limit ? projects.slice(0, limit) : projects;
 
   return (
-    <section className="wrap reveal" id="projects">
+    <Reveal as="section" className="wrap" id="projects">
       {full ? null : <SectionHead id="projects" />}
       <div className="project-grid">
         {items.map((project) => (
@@ -47,6 +48,6 @@ export default function Projects({ full = false, limit }) {
           </Link>
         </div>
       )}
-    </section>
+    </Reveal>
   );
 }

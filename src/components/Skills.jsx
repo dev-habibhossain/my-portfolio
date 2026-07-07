@@ -1,9 +1,10 @@
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import { skills } from "@/data/skills";
 
 export default function Skills({ full = false }) {
   return (
-    <section className="wrap reveal" id="skills">
+    <Reveal as="section" className="wrap" id="skills">
       {full ? null : <SectionHead id="skills" />}
       {skills.map((group) => (
         <div className="skill-group" key={group.category}>
@@ -17,6 +18,6 @@ export default function Skills({ full = false }) {
           </div>
         </div>
       ))}
-    </section>
+    </Reveal>
   );
 }

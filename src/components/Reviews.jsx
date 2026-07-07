@@ -1,4 +1,5 @@
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import { reviews } from "@/data/reviews";
 
 // Initials for the small avatar chip (no photos needed for testimonials).
@@ -12,7 +13,7 @@ function initials(name) {
 
 export default function Reviews({ full = false }) {
   return (
-    <section className="wrap reveal" id="reviews">
+    <Reveal as="section" className="wrap" id="reviews">
       {full ? null : <SectionHead id="reviews" />}
       <div className="reviews-grid">
         {reviews.map((review) => (
@@ -30,6 +31,6 @@ export default function Reviews({ full = false }) {
           </figure>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }

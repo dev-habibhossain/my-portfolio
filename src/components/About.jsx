@@ -1,10 +1,11 @@
 import SectionHead from "@/components/SectionHead";
+import Reveal from "@/components/Reveal";
 import { profile } from "@/data/profile";
 
 // full=false → home summary (short bio); full=true → dedicated /about page.
 export default function About({ full = false }) {
   return (
-    <section className="wrap reveal" id="about">
+    <Reveal as="section" className="wrap" id="about">
       {full ? null : <SectionHead id="about" />}
       <div className="about-grid">
         <div className="about-text">
@@ -28,6 +29,6 @@ export default function About({ full = false }) {
           </ul>
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 }
