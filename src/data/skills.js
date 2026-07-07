@@ -1,14 +1,15 @@
+// Skills grouped by how they're used — rendered as mono chip rows.
 export const skills = [
   {
-    category: "Frontend",
-    items: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    category: "Languages",
+    items: ["JavaScript", "TypeScript", "Python", "SQL"],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "PostgreSQL", "Prisma", "GraphQL"],
+    category: "Frameworks & Libraries",
+    items: ["React", "Next.js", "Node.js", "Express"],
   },
   {
-    category: "Practice",
-    items: ["Vercel", "Performance", "Accessibility", "Design Systems"],
+    category: "Infra & Tools",
+    items: ["PostgreSQL", "Docker", "AWS", "Git"],
   },
 ];

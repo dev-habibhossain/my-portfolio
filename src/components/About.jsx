@@ -1,47 +1,33 @@
-import Image from "next/image";
-import Link from "next/link";
-import SpecRow from "@/components/SpecRow";
+import SectionHead from "@/components/SectionHead";
 import { profile } from "@/data/profile";
-import { counts } from "@/data/nav";
 
-// full=false → short bio + "More about me" link (home summary)
-// full=true  → complete multi-paragraph bio (dedicated /about page)
+// full=false → home summary (short bio); full=true → dedicated /about page.
 export default function About({ full = false }) {
   return (
-    <SpecRow id="about" label="About" count={full ? null : counts.about}>
+    <section className="wrap reveal" id="about">
+      {full ? null : <SectionHead id="about" />}
       <div className="about-grid">
-        <div className="photo">
-          <Image
-            src={profile.photo}
-            alt={profile.name}
-            width={200}
-            height={200}
-            priority
-          />
-        </div>
-        <div className="about-body">
+        <div className="about-text">
           {full ? (
             profile.bioLong.map((para, i) => <p key={i}>{para}</p>)
           ) : (
-            <p>{profile.bio}</p>
-          )}
-
-          <div className="stat-row">
-            {profile.stats.map((stat) => (
-              <div className="stat" key={stat.label}>
-                <div className="num">{stat.num}</div>
-                <div className="label">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {!full && (
-            <Link href="/about" className="link-arrow">
-              More about me →
-            </Link>
+            <>
+              <p>{profile.bioLong[0]}</p>
+              <p>{profile.bioLong[1]}</p>
+            </>
           )}
         </div>
+        <div className="panel-frame">
+          <ul className="facts panel-inner">
+            {profile.facts.map((fact) => (
+              <li key={fact.label}>
+                <span>{fact.label}</span>
+                <span>{fact.value}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </SpecRow>
+    </section>
   );
 }

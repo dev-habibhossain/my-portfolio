@@ -1,14 +1,21 @@
-import { Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 import FadeInObserver from "@/components/FadeInObserver";
 import { profile } from "@/data/profile";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -20,11 +27,11 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  title: `${profile.name} — ${profile.role}`,
-  description: profile.sub,
+  title: `${profile.name} — ${profile.shortRole}`,
+  description: profile.heroBio,
   openGraph: {
-    title: `${profile.name} — ${profile.role}`,
-    description: profile.tagline,
+    title: `${profile.name} — ${profile.shortRole}`,
+    description: profile.heroBio,
     type: "website",
   },
 };
@@ -37,7 +44,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className={`${instrumentSans.variable} ${plexMono.variable}`}
+      className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -45,7 +52,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ThemeProvider>
-          <Sidebar />
+          <Header />
           <div className="content">{children}</div>
           <FadeInObserver />
         </ThemeProvider>

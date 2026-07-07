@@ -10,7 +10,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHeader idx="01" title="About" />
+      <PageHeader id="about" />
       <About full />
     </>
   );

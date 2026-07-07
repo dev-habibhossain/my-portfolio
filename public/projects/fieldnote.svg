@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Fieldnote cover">
+  <rect width="640" height="360" fill="#14171f"/>
+  <rect width="640" height="360" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d7068" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#14171f" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+  <rect x="180" y="60" width="280" height="240" rx="8" fill="#fafaf8"/>
+  <rect x="180" y="60" width="280" height="40" rx="8" fill="#e7efee"/>
+  <g fill="#3d7068">
+    <rect x="210" y="130" width="220" height="8" rx="4"/>
+    <rect x="210" y="156" width="220" height="8" rx="4"/>
+    <rect x="210" y="182" width="160" height="8" rx="4"/>
+    <rect x="210" y="220" width="220" height="8" rx="4" opacity="0.5"/>
+    <rect x="210" y="246" width="120" height="8" rx="4" opacity="0.5"/>
+  </g>
+  <circle cx="205" cy="80" r="6" fill="#c9a227"/>
+  <g stroke="#59b3a6" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M470 200 q40 -30 80 0 q-40 30 -80 0 Z"/>
+  </g>
+  <text x="60" y="330" font-family="'IBM Plex Mono', monospace" font-size="18" fill="#9ba1ae">local-first · offline-ready</text>
+</svg>

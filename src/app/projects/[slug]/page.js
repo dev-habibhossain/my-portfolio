@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, getProject } from "@/data/projects";
@@ -24,69 +25,49 @@ export default async function ProjectPage({ params }) {
 
   return (
     <>
-      <section className="page-intro fade-up in">
-        <Link href="/projects" className="back mono">
-          ← Projects
+      <section className="wrap page-intro reveal in">
+        <Link href="/projects" className="back">
+          ← All projects
         </Link>
-        <h1
-          style={{
-            fontSize: "2.6rem",
-            fontWeight: 600,
-            marginTop: "1rem",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          {project.title}
-        </h1>
-        <p
-          className="mono"
-          style={{
-            color: "var(--muted)",
-            fontSize: "0.8rem",
-            marginTop: "0.6rem",
-          }}
-        >
+        <div className="tag-eyebrow" style={{ marginTop: "14px" }}>
+          {project.fname}
+        </div>
+        <h1>{project.title}</h1>
+        <div className="detail-meta">
           {project.role} · {project.year}
-        </p>
-      </section>
+        </div>
 
-      <section className="row page-row fade-up">
-        <div className="row-label">Overview</div>
-        <div className="about-body">
+        <div className="detail-cover">
+          <Image
+            src={project.cover}
+            alt={`${project.title} preview`}
+            width={640}
+            height={360}
+            priority
+          />
+        </div>
+
+        <div className="detail-body">
           <p>{project.overview}</p>
 
-          <div className="tags" style={{ marginTop: "1.25rem" }}>
+          <div className="detail-tags">
             {project.tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
           </div>
 
-          <h3 style={{ margin: "2rem 0 0.9rem", fontSize: "0.95rem" }}>
-            Highlights
-          </h3>
-          <ul
-            style={{
-              listStyle: "none",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.55rem",
-            }}
-          >
+          <h3>Highlights</h3>
+          <ul>
             {project.highlights.map((h) => (
-              <li
-                key={h}
-                style={{ color: "var(--muted)", fontSize: "0.95rem" }}
-              >
-                — {h}
-              </li>
+              <li key={h}>{h}</li>
             ))}
           </ul>
 
-          <div className="btn-row">
+          <div className="hero-cta" style={{ marginTop: "36px" }}>
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
-                className="btn btn-primary"
+                className="btn primary"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -96,16 +77,20 @@ export default async function ProjectPage({ params }) {
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
-                className="btn btn-ghost"
+                className="btn"
                 target="_blank"
                 rel="noreferrer"
               >
-                Source
+                Source code →
               </a>
             )}
           </div>
         </div>
       </section>
+
+      <footer>
+        © 2026 {profile.name} — built with Next.js.
+      </footer>
     </>
   );
 }

@@ -1,14 +1,37 @@
+import ThemedImage from "@/components/ThemedImage";
 import { profile } from "@/data/profile";
 
 export default function Hero() {
   return (
-    <section className="hero fade-up in" id="hero">
-      <div className="kicker">{profile.kicker}</div>
-      <h1>{profile.tagline}</h1>
-      <p className="sub">{profile.sub}</p>
-      <a href="#projects" className="cta">
-        View work →
-      </a>
+    <section className="hero wrap" id="hero">
+      <div className="hero-grid">
+        <div className="hero-text">
+          <div className="status-line">
+            <span className="dot" aria-hidden="true"></span> {profile.statusLine}
+          </div>
+          <h1>
+            {profile.headlineLead}{" "}
+            <span className="hl">{profile.headlineName}</span>.
+            <br />
+            {profile.headlineTail}
+          </h1>
+          <div className="hero-role">{`// ${profile.role}`}</div>
+          <p className="hero-bio">{profile.heroBio}</p>
+          <div className="hero-cta">
+            <a className="btn primary" href="#projects">
+              View projects
+            </a>
+            <a className="btn" href={profile.resume} download>
+              Download résumé
+            </a>
+          </div>
+        </div>
+        <div className="hero-photo-wrap reveal">
+          <div className="hero-photo">
+            <ThemedImage priority />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

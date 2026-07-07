@@ -10,7 +10,7 @@ export const metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <PageHeader idx="04" title="Projects" />
+      <PageHeader id="projects" />
       <ProjectsGrid />
     </>
   );

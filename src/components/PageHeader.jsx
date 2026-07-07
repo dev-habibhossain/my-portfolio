@@ -1,19 +1,27 @@
 import Link from "next/link";
+import { sections } from "@/data/nav";
 
-// Small header used at the top of each dedicated navbar page: mono kicker with
-// the section index + a link back to the single-page index.
-export default function PageHeader({ idx, title }) {
+// Header shown at the top of each dedicated page: an eyebrow tag, a big title,
+// a back-to-home link, and an optional sub. Pulls copy from `sections` when an
+// `id` is given, but explicit props win.
+export default function PageHeader({ id, title, sub, eyebrow }) {
+  const meta = id ? sections[id] : null;
+  const finalEyebrow = eyebrow ?? meta?.eyebrow;
+  const finalTitle = title ?? meta?.title;
+  const finalSub = sub ?? meta?.sub;
+
   return (
-    <section className="page-intro fade-up in">
-      <Link href="/" className="back mono">
-        ← Index
+    <section className="wrap page-intro reveal in">
+      <Link href="/" className="back">
+        ← Back to home
       </Link>
-      <h1 style={{ fontSize: "2.2rem", fontWeight: 600, marginTop: "1rem", letterSpacing: "-0.01em" }}>
-        <span className="mono" style={{ color: "var(--accent)", fontSize: "0.8rem", marginRight: "0.6rem" }}>
-          {idx}
-        </span>
-        {title}
-      </h1>
+      {finalEyebrow && (
+        <div className="tag-eyebrow" style={{ marginTop: "14px" }}>
+          {finalEyebrow}
+        </div>
+      )}
+      <h1>{finalTitle}</h1>
+      {finalSub && <p className="page-sub">{finalSub}</p>}
     </section>
   );
 }

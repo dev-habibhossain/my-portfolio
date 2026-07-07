@@ -42,7 +42,7 @@ export default function ContactForm() {
         <label htmlFor="cf-message">Message</label>
         <textarea id="cf-message" name="message" required />
       </div>
-      <button type="submit" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
+      <button type="submit" className="btn primary" style={{ alignSelf: "flex-start" }}>
         Send message →
       </button>
       {status === "sent" ? (

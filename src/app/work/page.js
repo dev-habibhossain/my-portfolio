@@ -3,14 +3,14 @@ import Experience from "@/components/Experience";
 import { profile } from "@/data/profile";
 
 export const metadata = {
-  title: `Work — ${profile.name}`,
-  description: `Experience and work history of ${profile.name}.`,
+  title: `Experience — ${profile.name}`,
+  description: `Work history and experience of ${profile.name}.`,
 };
 
 export default function WorkPage() {
   return (
     <>
-      <PageHeader idx="02" title="Work" />
+      <PageHeader id="experience" />
       <Experience full />
     </>
   );

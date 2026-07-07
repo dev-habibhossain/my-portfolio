@@ -1,6 +1,5 @@
-import SpecRow from "@/components/SpecRow";
+import SectionHead from "@/components/SectionHead";
 import { reviews } from "@/data/reviews";
-import { counts } from "@/data/nav";
 
 // Initials for the small avatar chip (no photos needed for testimonials).
 function initials(name) {
@@ -13,7 +12,8 @@ function initials(name) {
 
 export default function Reviews({ full = false }) {
   return (
-    <SpecRow id="reviews" label="Reviews" count={full ? null : counts.reviews}>
+    <section className="wrap reveal" id="reviews">
+      {full ? null : <SectionHead id="reviews" />}
       <div className="reviews-grid">
         {reviews.map((review) => (
           <figure className="review-card" key={review.name}>
@@ -24,14 +24,12 @@ export default function Reviews({ full = false }) {
               </span>
               <span>
                 <span className="r-name">{review.name}</span>
-                <span className="r-role" style={{ display: "block" }}>
-                  {review.role}
-                </span>
+                <span className="r-role">{review.role}</span>
               </span>
             </figcaption>
           </figure>
         ))}
       </div>
-    </SpecRow>
+    </section>
   );
 }

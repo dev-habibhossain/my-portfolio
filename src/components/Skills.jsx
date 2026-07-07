@@ -1,28 +1,22 @@
-import Link from "next/link";
-import SpecRow from "@/components/SpecRow";
+import SectionHead from "@/components/SectionHead";
 import { skills } from "@/data/skills";
-import { counts } from "@/data/nav";
 
 export default function Skills({ full = false }) {
   return (
-    <SpecRow id="skills" label="Skills" count={full ? null : counts.skills}>
-      <div className="skills-cols">
-        {skills.map((group) => (
-          <div className="skills-col" key={group.category}>
-            <h3>{group.category}</h3>
-            <ul>
-              {group.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+    <section className="wrap reveal" id="skills">
+      {full ? null : <SectionHead id="skills" />}
+      {skills.map((group) => (
+        <div className="skill-group" key={group.category}>
+          <h3>{group.category}</h3>
+          <div className="chip-row">
+            {group.items.map((item) => (
+              <span className="chip" key={item}>
+                {item}
+              </span>
+            ))}
           </div>
-        ))}
-      </div>
-      {!full && (
-        <Link href="/skills" className="link-arrow">
-          All skills &amp; tools →
-        </Link>
-      )}
-    </SpecRow>
+        </div>
+      ))}
+    </section>
   );
 }

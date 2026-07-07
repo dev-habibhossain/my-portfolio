@@ -1,17 +1,17 @@
 import Link from "next/link";
+import SectionHead from "@/components/SectionHead";
 import ContactForm from "@/components/ContactForm";
 import { profile, socialLinks } from "@/data/profile";
 
-// full=false → closing statement + Let's talk / résumé / socials (home)
-// full=true  → complete contact page: details + résumé + socials + form
+// full=false → home closing box (contact-box); full=true → full contact page
+// with details + form.
 export default function Contact({ full = false, withFooter = true }) {
   const year = 2026;
 
   return (
-    <section id="contact" className="fade-up">
-      {full ? (
-        <div className="row page-row" style={{ borderTop: "none" }}>
-          <div className="row-label">Contact</div>
+    <>
+      <section className="wrap reveal" id="contact">
+        {full ? (
           <div className="contact-grid">
             <div className="contact-aside">
               <p>
@@ -32,20 +32,10 @@ export default function Contact({ full = false, withFooter = true }) {
                 </div>
                 <div>
                   <span className="label">Location</span>
-                  <span style={{ color: "var(--muted)" }}>
+                  <span style={{ color: "var(--ink-soft)" }}>
                     {profile.location}
                   </span>
                 </div>
-              </div>
-
-              <div className="btn-row">
-                <a
-                  href={profile.resume}
-                  className="btn btn-primary"
-                  download
-                >
-                  Download résumé ↓
-                </a>
               </div>
 
               <div className="socials-big">
@@ -59,41 +49,45 @@ export default function Contact({ full = false, withFooter = true }) {
 
             <ContactForm />
           </div>
-        </div>
-      ) : (
-        <div className="contact-row">
-          <div>
-            <h2>Let&apos;s build something worth showing.</h2>
-            <div className="btn-row">
-              <Link href="/contact" className="btn btn-primary">
-                Let&apos;s talk →
-              </Link>
-              <a href={profile.resume} className="btn btn-ghost" download>
-                Résumé ↓
-              </a>
+        ) : (
+          <>
+            <SectionHead id="contact" showTitle={false} />
+            <div className="panel-frame">
+              <div className="contact-box panel-inner">
+                <div>
+                  <h2>Let&apos;s talk.</h2>
+                  <p>
+                    Looking for a full-stack developer? I&apos;d like to hear
+                    about it — email is fastest.
+                  </p>
+                </div>
+                <div className="contact-links">
+                  <a className="btn primary" href={`mailto:${profile.email}`}>
+                    Email me
+                  </a>
+                  <Link className="btn" href="/contact">
+                    Contact page
+                  </Link>
+                  <a
+                    className="btn"
+                    href={profile.socials.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="socials-big">
-              {socialLinks.map((s) => (
-                <a key={s.name} href={s.href} target="_blank" rel="noreferrer">
-                  {s.name}
-                </a>
-              ))}
-            </div>
-          </div>
-          <a href={`mailto:${profile.email}`} className="contact-email">
-            {profile.email}
-          </a>
-        </div>
-      )}
+          </>
+        )}
+      </section>
 
       {withFooter ? (
         <footer>
-          <span>
-            &copy; {year} {profile.name}
-          </span>
-          <span>Built with Next.js</span>
+          © {year} {profile.name} — built with Next.js.
         </footer>
       ) : null}
-    </section>
+    </>
   );
 }

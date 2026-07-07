@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Ledgerline cover">
+  <rect width="640" height="360" fill="#0f3b36"/>
+  <rect width="640" height="360" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d7068" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0f3b36" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#59b3a6" stroke-opacity="0.25" stroke-width="1">
+    <path d="M40 60 H600 M40 120 H600 M40 180 H600 M40 240 H600 M40 300 H600"/>
+  </g>
+  <polyline points="60,270 140,210 220,235 300,150 380,180 460,110 540,140 600,90"
+    fill="none" stroke="#c9a227" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#e7efee">
+    <circle cx="140" cy="210" r="5"/><circle cx="300" cy="150" r="5"/>
+    <circle cx="460" cy="110" r="5"/><circle cx="600" cy="90" r="5"/>
+  </g>
+  <g fill="#59b3a6" opacity="0.9">
+    <rect x="60" y="300" width="30" height="24" rx="2"/>
+    <rect x="110" y="285" width="30" height="39" rx="2"/>
+    <rect x="160" y="305" width="30" height="19" rx="2"/>
+  </g>
+  <text x="60" y="70" font-family="'IBM Plex Mono', monospace" font-size="20" fill="#e7efee" font-weight="600">$ ledgerline --live</text>
+</svg>

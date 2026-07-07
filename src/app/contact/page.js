@@ -10,7 +10,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHeader idx="06" title="Contact" />
+      <PageHeader id="contact" />
       <Contact full />
     </>
   );

@@ -2,7 +2,9 @@ export const projects = [
   {
     slug: "ledgerline",
     title: "Ledgerline",
+    fname: "ledgerline/",
     year: "2025",
+    cover: "/projects/ledgerline.svg",
     description:
       "A finance dashboard for freelancers to track invoices and cash flow in real time.",
     overview:
@@ -20,7 +22,9 @@ export const projects = [
   {
     slug: "fieldnote",
     title: "Fieldnote",
+    fname: "fieldnote/",
     year: "2024",
+    cover: "/projects/fieldnote.svg",
     description:
       "A minimalist writing tool for researchers, built around fast local-first sync.",
     overview:
@@ -38,7 +42,9 @@ export const projects = [
   {
     slug: "northline-studio",
     title: "Northline Studio",
+    fname: "northline-studio/",
     year: "2023",
+    cover: "/projects/northline-studio.svg",
     description:
       "Marketing site and CMS-driven blog for a boutique architecture practice.",
     overview:
@@ -56,7 +62,9 @@ export const projects = [
   {
     slug: "trailmark",
     title: "Trailmark",
+    fname: "trailmark/",
     year: "2022",
+    cover: "/projects/trailmark.svg",
     description:
       "A route-planning tool for long-distance hikers with offline map caching.",
     overview:
