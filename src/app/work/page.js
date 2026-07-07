@@ -11,7 +11,7 @@ export default function WorkPage() {
   return (
     <>
       <PageHeader idx="02" title="Work" />
-      <Experience count={null} />
+      <Experience full />
     </>
   );
 }

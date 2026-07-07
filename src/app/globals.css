@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root[data-theme="light"] {
-  --bg: #fcfcfa;
-  --text: #15161a;
-  --muted: #6b6e76;
+  --bg: #eeece5; /* warmer paper — a step down from the near-white original */
+  --text: #14151a;
+  --muted: #63666e;
   --accent: #2e4374;
-  --accent-soft: rgba(46, 67, 116, 0.08);
-  --hairline: #e6e5e0;
+  --accent-soft: rgba(46, 67, 116, 0.09);
+  --hairline: #dcdad1;
   --avatar-bg: #101114;
+  --surface: #f6f4ee; /* raised cards / form fields */
+  --surface-hover: #f0eee7;
 }
 :root[data-theme="dark"] {
   --bg: #111114;
@@ -17,6 +19,8 @@
   --accent-soft: rgba(143, 173, 221, 0.12);
   --hairline: #242429;
   --avatar-bg: #050505;
+  --surface: #17171b;
+  --surface-hover: #1c1c21;
 }
 
 * {
@@ -450,6 +454,288 @@ footer {
   border-radius: 2px;
 }
 
+/* ---- shared link + button primitives ---- */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 1.5rem;
+  transition: gap 0.25s ease;
+}
+.link-arrow:hover {
+  gap: 0.7rem;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.75rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.7rem 1.3rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+    transform 0.15s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--hairline);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---- about: photo + bio ---- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.photo {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: var(--avatar-bg);
+  aspect-ratio: 1 / 1;
+  width: 200px;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-body p + p {
+  margin-top: 1rem;
+}
+
+/* ---- project cards (clickable) ---- */
+.acc-head .view {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.acc-body .view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+  transition: gap 0.25s ease;
+}
+.acc-body .view-link:hover {
+  gap: 0.7rem;
+}
+
+/* project grid on the full /projects page */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.proj-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--surface);
+  transition: border-color 0.25s ease, transform 0.2s ease;
+}
+.proj-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.proj-card .pc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.proj-card .pc-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.proj-card .pc-year {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.proj-card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* ---- reviews ---- */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.review-card {
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.review-card blockquote {
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+.review-card .r-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.review-card .r-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.review-card .r-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.review-card .r-role {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+/* ---- contact form ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.contact-aside p {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 42ch;
+}
+.contact-meta {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.contact-meta a {
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+.contact-meta a:hover {
+  color: var(--accent);
+}
+.contact-meta .label {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.socials-big {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.75rem;
+}
+.socials-big a {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.socials-big a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form label {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.form input,
+.form textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 0.7rem 0.85rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.25s ease;
+}
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.form-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.form-note.ok {
+  color: var(--accent);
+}
+
 .fade-up {
   opacity: 0;
   transform: translateY(16px);
@@ -514,6 +800,19 @@ footer {
   }
   .skills-cols {
     grid-template-columns: 1fr 1fr;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .photo {
+    width: 140px;
+  }
+  .proj-grid,
+  .reviews-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   .contact-row {
     padding: 3rem 1.5rem;

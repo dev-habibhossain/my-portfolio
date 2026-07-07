@@ -1,10 +1,11 @@
+import Link from "next/link";
 import SpecRow from "@/components/SpecRow";
 import { skills } from "@/data/skills";
-import { sectionCount } from "@/data/nav";
+import { counts } from "@/data/nav";
 
-export default function Skills({ count = `03 / ${sectionCount}` }) {
+export default function Skills({ full = false }) {
   return (
-    <SpecRow id="skills" label="Skills" count={count}>
+    <SpecRow id="skills" label="Skills" count={full ? null : counts.skills}>
       <div className="skills-cols">
         {skills.map((group) => (
           <div className="skills-col" key={group.category}>
@@ -17,6 +18,11 @@ export default function Skills({ count = `03 / ${sectionCount}` }) {
           </div>
         ))}
       </div>
+      {!full && (
+        <Link href="/skills" className="link-arrow">
+          All skills &amp; tools →
+        </Link>
+      )}
     </SpecRow>
   );
 }

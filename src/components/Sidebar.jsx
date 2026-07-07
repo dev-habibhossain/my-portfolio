@@ -80,8 +80,12 @@ export default function Sidebar() {
 
         <nav className="side-nav" aria-label="Section index">
           {nav.map((item) => {
-            // On home, link to the in-page anchor; elsewhere, to the route.
-            const href = isHome ? item.anchor : item.href;
+            // On home, link to the in-page anchor. On dedicated pages, link to
+            // the item's route — or fall back to the home anchor for sections
+            // that have no standalone page (href: null), e.g. Reviews.
+            const href = isHome
+              ? item.anchor
+              : item.href ?? `/${item.anchor}`;
             return (
               <Link
                 key={item.id}

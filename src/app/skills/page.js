@@ -11,7 +11,7 @@ export default function SkillsPage() {
   return (
     <>
       <PageHeader idx="03" title="Skills" />
-      <Skills count={null} />
+      <Skills full />
     </>
   );
 }

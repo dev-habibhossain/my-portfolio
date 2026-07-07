@@ -3,6 +3,7 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import ProjectsAccordion from "@/components/ProjectsAccordion";
+import Reviews from "@/components/Reviews";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -10,9 +11,10 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Experience />
+      <Experience limit={2} />
       <Skills />
       <ProjectsAccordion />
+      <Reviews />
       <Contact />
     </>
   );

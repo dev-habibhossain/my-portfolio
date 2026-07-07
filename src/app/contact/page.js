@@ -10,8 +10,8 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHeader idx="05" title="Contact" />
-      <Contact />
+      <PageHeader idx="06" title="Contact" />
+      <Contact full />
     </>
   );
 }

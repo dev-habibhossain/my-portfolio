@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader idx="01" title="About" />
-      <About count={null} />
+      <About full />
     </>
   );
 }

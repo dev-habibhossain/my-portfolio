@@ -10,8 +10,12 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(null);
 
   useEffect(() => {
+    // Sync React state with the theme the pre-paint script already applied to
+    // <html>. This must run on mount (not during render) to avoid an SSR
+    // hydration mismatch, so the setState-in-effect here is intentional.
     const current = document.documentElement.getAttribute("data-theme");
     if (current === "dark" || current === "light") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(current);
     } else {
       const prefersDark = window.matchMedia(

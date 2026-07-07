@@ -1,12 +1,17 @@
+import Link from "next/link";
 import SpecRow from "@/components/SpecRow";
 import { experience } from "@/data/experience";
-import { sectionCount } from "@/data/nav";
+import { counts } from "@/data/nav";
 
-export default function Experience({ count = `02 / ${sectionCount}` }) {
+// limit → number of roles to show (home summary); full → dedicated /work page
+export default function Experience({ limit, full = false }) {
+  const items = limit ? experience.slice(0, limit) : experience;
+  const hasMore = limit && experience.length > limit;
+
   return (
-    <SpecRow id="experience" label="Work" count={count}>
+    <SpecRow id="experience" label="Work" count={full ? null : counts.experience}>
       <div>
-        {experience.map((job) => (
+        {items.map((job) => (
           <div className="tl-item" key={`${job.company}-${job.period}`}>
             <div className="tl-top">
               <div className="tl-role">{job.role}</div>
@@ -17,6 +22,11 @@ export default function Experience({ count = `02 / ${sectionCount}` }) {
           </div>
         ))}
       </div>
+      {hasMore && (
+        <Link href="/work" className="link-arrow">
+          Full work history →
+        </Link>
+      )}
     </SpecRow>
   );
 }
